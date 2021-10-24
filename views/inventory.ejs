@@ -1,0 +1,51 @@
+<%- include("partials/header") %> 
+
+<div class="flex-structure">
+
+  <div>
+    <a style ="text-decoration: none;" href="/"><button class="style-button">Home</button></a>
+  </div>
+
+</div>
+
+<h1 style="background-color: gainsboro; text-align: center;">INVENTORY</h1>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark">
+          <th scope="col">#id</th>
+          <th scope="col">Date</th>
+          <th scope="col">Name</th>
+          <th scope="col">Supplier</th>
+          <th scope="col">Cost Price<br>(per unit)</th>
+          <th scope="col">Stock<br>(count)</th>
+          <th scope="col">Total paid<br>(amount)</th>
+          <th scope="col-sm-3">Owner Input</th>
+          <!-- <th scope="col">Selling Price(per unit)</th> -->
+        </tr>
+      </thead>
+      <tbody>
+
+    <% printParts.forEach((event) => { %>
+        <form action="/update" method="post">
+            <tr>
+              <th scope="row"><%= event.id %></th>
+              <td><%= event.date %> </td>
+              <td><%= event.name %></td>
+              <td><%= event.supplier %></td>
+              <td><%= event.costPrice %> </td>
+              <td ><%= event.stock %></td>
+              <input name="stock" value= <%= event.stock %> type="text" style="display: none;">
+              <td><%= event.total %> </td>
+              <button style="display: none;"><input name= "costPrice" value=<%= event.costPrice %> type="text"></button>
+              <td><input name = "sellingPrice" data-bs-toggle="tooltip" title="Selling price (per unit)" autocomplete="off" placeholder="Selling Price (per unit)" style="width: 6rem;" type="text"></td>
+              <td><input name = "stockSold" data-bs-toggle="tooltip" title="Sold Units" placeholder="Sold quantity" type="text" autocomplete="off" style="width: 6rem; font-size: small;"></td> 
+              <td><button name="updateData" type="submit" value=<%= event._id %>>update</button></td>
+            </tr>  
+        </form>      
+    <%  }) %> 
+</tbody>
+</table>
+
+<%- include("partials/footer") %> 

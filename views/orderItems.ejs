@@ -1,0 +1,41 @@
+<%- include("partials/header") %> 
+
+<div class="flex-structure">
+
+  <div>
+      <a style ="text-decoration: none;" href="/"><button class="style-button">Home</button></a>
+  </div>
+
+</div>
+
+<h1 style="background-color: gainsboro; text-align: center;">PARTS TO ORDER</h1>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#ID</th>
+        <th scope="col">Last Ordered</th>
+        <th scope="col">Part Name</th>
+        <th scope="col">Cost Price<br>(per unit)</th>
+        <th scope="col">Available<br>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <%  orderParts.forEach((event) => { %>
+        <form action="" method="post">
+            <tr>
+                <th><%= event.id %></th>
+                <td><%= event.date %> </td>
+                <td><%= event.name %></td>
+                <td><%= event.costPrice %></td>
+                <td><%= event.stock %></td>
+              </tr>
+        </form>
+    <%  }) %> 
+
+    </tbody>
+  </table>
+
+<%- include("partials/footer") %> 
