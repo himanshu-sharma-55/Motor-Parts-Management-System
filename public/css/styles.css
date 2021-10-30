@@ -19,7 +19,7 @@
 .flex-structure {
   display: flex;
   justify-content: space-evenly;
-  background-color:white;
+  background-color: white;
 }
 
 .page-container {
@@ -34,7 +34,34 @@
   border: 3px cyan solid;
   box-shadow: 1px 3px 5px cyan;
   /* display: flex; */
-  
+
   margin-top: 2rem;
-  background-color:gainsboro;
+  background-color: gainsboro;
+}
+
+.text-container-style {
+  border: 1px yellow solid;
+  box-shadow: 0px 1px 2px yellow;
+}
+
+.stats-display {
+  background-color: rgb(0, 255, 115);
+  text-align: center;
+  box-shadow: 1px 1px 8px cyan;
+  padding: 10px;
+  /* text-shadow: 1px 1px 10px white; */
+  color: white;
+  text-shadow: 1px 1px 4px black;
+}
+
+.inventory-inputs {
+  width: 6rem;
+  font-size: medium;
+  border: 1px rgb(25, 0, 255) solid;
+  box-shadow: 0px 1px 2px rgb(0, 255, 234);
+  outline: none;
+}
+
+.inventory-inputs:hover {
+  box-shadow: 0px 1px 5px rgb(0, 68, 255);
 }

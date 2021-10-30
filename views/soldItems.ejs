@@ -3,40 +3,56 @@
 <div class="flex-structure">
 
   <div>
-      <a style ="text-decoration: none;" href="/"><button class="style-button">Home</button></a>
+      <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home</button></a>
   </div>
-
+  <div>
+    <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
+  </div>
+  <div>
+    <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
+  </div>
+  <div>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
+  </div>
 </div>
 
 <h1 style="background-color: gainsboro; text-align: center;">SOLD PARTS</h1>
 <hr />
 
-<table class="table table-striped">
-    <thead>
-      <tr class="table-dark">
-        <th scope="col">#ID</th>
-        <th scope="col">Date</th>
-        <th scope="col">Part Name</th>
-        <th scope="col">Cost Price<br>(per unit)</th>
-        <th scope="col">Selling Price<br>(per unit)</th>
-        <th scope="col">Quantity<br> (sold)</th>
-        <th scope="col">Profit<br> ( in Rs.)</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="col-md-12 text-center">
+  <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-dark">View Statistics</button></a>
+</div>
 
-    <%  soldParts.forEach((event) => { %>
-        <form action="" method="post">
-            <tr>
-                <th><%= event.id %></th>
-                <td><%= event.date %> </td>
-                <td><%= event.name %></td>
-                <td><%= event.CP %></td>
-                <td><%= event.SP %></td>
-                <td><%= event.quantity %></td>
-                <td><%= event.profit %></td>
-              </tr>
-        </form>
+  <form action="" method="post">
+    <br>
+    <table class="table table-striped table-bordered text-center">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">#ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Part Name</th>
+            <th scope="col">Cost Price<br>(per unit)</th>
+            <th scope="col">Selling Price<br>(per unit)</th>
+            <th scope="col">Quantity<br> (sold)</th>
+            <th scope="col">Profit<br> ( in Rs.)</th>
+            <th scope="col">Revenue<br> ( in Rs.)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        <%  soldParts.forEach((event) => { %>
+
+                <tr>
+                    <th><%= event.id %></th>
+                    <td class="col-2"><%= event.date %> </td>
+                    <td><%= event.name %></td>
+                    <td><%= event.CP %></td>
+                    <td><%= event.SP %></td>
+                    <td><%= event.quantity %></td>
+                    <td><%= event.profit %></td>
+                    <td><%= event.revenue %> </td>
+                  </tr>
+  </form>
     <%  }) %> 
         
     </tbody>

@@ -5,6 +5,8 @@ const mongoose = require("mongoose"); //library to connect mongoDB with mongoose
 
 const app = express();
 
+let thresholdValue = 0;
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +17,7 @@ const partSchema = {
     id:{type: Number,required: [true, "No ID❌"]},
     date: {type: Date, required: [true, "No ID❌"]},
     name: {type: String, required: [true, "No Name❌"]},
+    size: {type: String, required: [true, "No Size"]},
     costPrice:{type: Number, required: [true, "No Price❌"]},
     supplier: {type: String, required: [true, "No Supplier Info❌"]},
     stock: {type: Number, required: [true, "No Stock Info❌"]},
@@ -29,6 +32,7 @@ const itemSoldSchema = {
     SP: {type: Number},
     profit: {type: Number},
     quantity: {type: Number},
+    revenue: {type: Number},
 }
 
 const Part = mongoose.model("Part", partSchema);
@@ -60,17 +64,37 @@ app.get("/soldItems", (req, res) => {
         } else {
             res.render("soldItems", {soldParts: data});
         }
-    })
+    }) 
 })
 
 app.get("/orderItems", (req, res) => {
 
-    Part.find({stock: {$lt: 5}}, (err, data) => {
+    Part.find({stock: {$lt: thresholdValue}}, (err, data) => {
         if(err) {
             console.log(err);
             console.log("Error while generating order parts list❌");
         } else {
             res.render("orderItems", {orderParts: data});
+        }
+    })
+})
+
+app.get("/statistics", (req, res) => {
+
+    SoldItem.find({}, (err, data) => {
+        if(err) {
+            console.log(err + "Error occured while calculating Stats❌");
+        }
+        else {
+            let totalRevenue = 0;
+            let totalProfit = 0;
+            data.forEach( (event) => {
+                totalRevenue += event.revenue;
+                totalProfit += event.profit;
+            });
+            thresholdValue = totalRevenue / totalProfit;
+            console.log(thresholdValue.toFixed(2));
+            res.render("statistics", {totalRevenue: totalRevenue, totalProfit: totalProfit, Threshold: thresholdValue });
         }
     })
 })
@@ -81,6 +105,7 @@ app.post("/", (req, res) => {
         id: req.body.partId,
         date: new Date(),
         name: req.body.partName,
+        size: req.body.size,
         supplier: req.body.supplierInfo,
         costPrice: req.body.price,
         stock: req.body.quantity,
@@ -138,6 +163,7 @@ app.post("/update", (req, res) => {
                     SP: sellP,
                     profit: madeProfit,
                     quantity: soldQuantity,
+                    revenue: (sellP * soldQuantity),
                 });
                 newItemSold.save();
                 console.log("Item is sold and stock is updated✅");

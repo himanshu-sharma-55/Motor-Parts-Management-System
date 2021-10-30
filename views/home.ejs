@@ -3,13 +3,16 @@
 <div class="flex-structure">
 
   <div>
-      <a style ="text-decoration: none;" href="/inventory"><button class="style-button">Inventory</button></a>
+      <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
   </div>
   <div>
-      <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button">Sold Parts</button></a>
+      <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
   </div>
   <div>
-      <a style ="text-decoration: none; " href="/orderItems"><button class="style-button">Parts to order</button></a> 
+      <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
+  </div>
+  <div>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
   </div>
 
 </div>
@@ -28,10 +31,10 @@
         
         <div class="p-2 bd-highlight">
           <div class="form-floating" style="width: 15rem;">
-            <select style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" class="form-select" id="floatingSelect" aria-label="Floating label select example" required>
-                <option selected value="1">Small</option>
-                <option value="2">Large</option>
-                <option value="3">Medium</option>
+            <select name="size" style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" class="form-select" id="floatingSelect" aria-label="Floating label select example" required>
+                <option selected value="Small">Small</option>
+                <option value="Large">Large</option>
+                <option value="Medium">Medium</option>
             </select>
             <label for="floatingSelect">select size of the part</label>
           </div>
@@ -50,7 +53,7 @@
         <br>
         <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" type="text" name="quantity" class="form-control" placeholder="Quantity" autocomplete="off" required>
         <br>
-        <button style="border: 1px blue solid; box-shadow: 0px 1px 2px blue; color: black;" name="button" type="submit" class="btn btn-outline-primary">SUBMIT</button>
+        <button style="border: 1px rgb(0, 255, 221) solid; box-shadow: 0px 1px 5px blue; color: black;" name="button" type="submit" class="btn btn-outline-info">SUBMIT</button>
       </div>
     </form>
   </div>
@@ -58,38 +61,3 @@
 </div>
 
 <%- include('partials/footer') %>
-
-<!-- 
-<div class="flex-structure">
-
-  <div>
-    <div class="form-floating" style="width: 15rem;">
-      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" required>
-          <option selected value="1">Small</option>
-          <option value="2">Large</option>
-          <option value="3">Medium</option>
-      </select>
-      <label for="floatingSelect">select size of the part</label>
-    </div>
-  </div>
-
-  <div>
-    <input type="text" name="partId" class="form-control" placeholder="Part ID" required>
-  </div>
-  <div>
-    <input type="text" name="partName" class="form-control" placeholder="Part Name" required>
-  </div>
-  <div>
-    <textarea class="form-control" name="supplierInfo" rows="3" cols="4" placeholder="Supplier Name and Add." required></textarea>
-  </div>
-  <div>
-    <input type="text" name="price" class="form-control" placeholder="Cost Price (per unit)" required>
-  </div>
-  <div>
-    <input type="text" name="quantity" class="form-control" placeholder="Quantity" required>
-  </div>
-  <div>
-    <button name="button" type="submit" class="btn btn-outline-primary">SUBMIT</button>
-  </div>
-
-</div> -->

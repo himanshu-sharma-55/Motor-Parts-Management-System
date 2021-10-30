@@ -1,0 +1,33 @@
+<%- include("partials/header") %> 
+
+<div class="flex-structure">
+
+    <div>
+        <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
+    </div>
+    <div>
+        <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
+    </div>
+    <div>
+        <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
+    </div>
+    <div>
+      <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
+    </div>
+  
+  </div>
+  
+  <hr style="border: 8px gray dashed; background-color: white;" />
+  <br>
+
+  <h1 style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0)); text-align: center; color: white; text-shadow: 1px 1px 3px black;">TODAY</h1>
+  <div class="flex-structure" style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0));padding: 1rem;">
+    <h1 class="stats-display">Total Revenue: <%= totalRevenue %></h1>
+    <hr />
+    <h1 class="stats-display">Total Profit: <%= totalProfit %></h1>
+    <hr />
+    <h1 class="stats-display">Threshold Value: <%= Threshold.toFixed(2) %></h1>
+    <hr />  
+  </div>   
+
+<%- include("partials/footer") %> 
