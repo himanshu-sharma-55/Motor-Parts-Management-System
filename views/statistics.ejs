@@ -20,6 +20,14 @@
   <hr style="border: 8px gray dashed; background-color: white;" />
   <br>
 
+  <form action="/profit" method="post">
+
+    <div class="input-group mb-3 w-25" style="margin-left: 2%;">
+      <input name="Date" type="date" class="form-control" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
+      <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fa fa-filter"></i> Profit By Date</button>
+    </div>
+  </form>
+  
   <h1 style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0)); text-align: center; color: white; text-shadow: 1px 1px 3px black;">TODAY</h1>
   <div class="flex-structure" style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0));padding: 1rem;">
     <h1 class="stats-display">Total Revenue: <%= totalRevenue %></h1>

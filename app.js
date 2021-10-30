@@ -6,6 +6,7 @@ const mongoose = require("mongoose"); //library to connect mongoDB with mongoose
 const app = express();
 
 let thresholdValue = 0;
+let thresholdValuePerDay = 0;
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -93,10 +94,22 @@ app.get("/statistics", (req, res) => {
                 totalProfit += event.profit;
             });
             thresholdValue = totalRevenue / totalProfit;
-            console.log(thresholdValue.toFixed(2));
             res.render("statistics", {totalRevenue: totalRevenue, totalProfit: totalProfit, Threshold: thresholdValue });
         }
     })
+})
+
+app.get("/sorting", (req, res) => {
+
+    Part.find({}, (err, data) => {
+        if(err) {
+            console.log(err);
+            console.log("Error while displaying purchased items from inventory ❌")
+        } else{
+            res.render("sorting", {printParts: data});
+        }
+    })
+
 })
 
 app.post("/", (req, res) => {
@@ -112,24 +125,28 @@ app.post("/", (req, res) => {
         total: (req.body.price * req.body.quantity)
     });
 
-    newPart.save();
-    res.redirect("/inventory");
-    console.log("Part registered successfully✅");
-
-    // Part.findById(req.body.partId, (err, data) => {
-    //     if(err){
-    //         console.log(err);
-    //         console.log("Error while checking duplicates❌")
-    //     }
-    //     else if( data.id !== req.body.partId || data.id === null){
-    //         newPart.save();
-    //         res.redirect("/inventory");
-    //         console.log("Part registered successfully✅");
-    //     }else {
-    //         res.redirect("/");
-    //         console.log("Duplicate entry please try again❌")
-    //     }
-    // })
+    // Checking duplicates 
+    Part.find({}, (err, data) => {
+        if(err){
+            console.log(err);
+            console.log("Error while checking duplicates❌")
+        } else {
+            let set = 0;
+            data.forEach(event => {
+                if(Number(event.id) === Number(req.body.partId)) {
+                    set = 1;
+                }
+            })
+            if(set === 0) {
+                newPart.save();
+                res.redirect("/inventory");
+                console.log("Part registered successfully✅");
+            } else {
+                console.log("Given ID already exists❌  Enter a unique ID");
+                res.redirect("/")
+            }
+        }
+    })
     
 })
 
@@ -176,6 +193,54 @@ app.post("/update", (req, res) => {
     }
 })
 
+
+app.post("/sorting", (req, res) => {
+
+    const inputDate = new Date(req.body.Date);
+    const newOne = inputDate.toLocaleDateString();
+    
+    Part.find({}, (err, data) => {
+        if(err) {
+            console.log((err) + "An Error occued while filtering inventory❌");
+        } else {
+            const filterArray = [];
+
+           data.forEach(event => {
+            if(newOne === event.date.toLocaleDateString()) {
+                filterArray.push(event);
+            }
+            console.log(event.date.toLocaleDateString());
+           }) 
+            res.render("sorting", {printParts: filterArray});
+        }
+    })
+
+})
+
+app.post("/profit", (req, res) => {
+    const inputDate = new Date(req.body.Date);
+    const newOne = inputDate.toLocaleDateString();
+
+    SoldItem.find({}, (err, data) => {
+        if(err) {
+            console.log(err + "Error occured while calculating Profit❌");
+        }
+        else {
+            let todaysRevenue = 0;
+            let todaysProfit = 0;
+            data.forEach( (event) => {
+                if(newOne === event.date.toLocaleDateString()) {
+                    todaysRevenue += event.revenue;
+                    todaysProfit += event.profit;
+                } 
+            });
+
+            thresholdValuePerDay = todaysRevenue / todaysProfit;
+            res.render("statistics", {totalRevenue: todaysRevenue, totalProfit: todaysProfit, Threshold: thresholdValuePerDay });
+        }
+    })
+})
+
 app.listen(3000, () => {
-    console.log("server stared on localhost: 3000✅");
+    console.log("Server stared on localhost:3000✅");
   });
