@@ -94,7 +94,7 @@ app.get("/statistics", (req, res) => {
                 totalProfit += event.profit;
             });
             thresholdValue = totalRevenue / totalProfit;
-            res.render("statistics", {totalRevenue: totalRevenue, totalProfit: totalProfit, Threshold: thresholdValue });
+            res.render("statistics", {totalRevenue: totalRevenue, totalProfit: totalProfit, Threshold: thresholdValue, Day: "OVERALL STATS"});
         }
     })
 })
@@ -132,15 +132,35 @@ app.post("/", (req, res) => {
             console.log("Error while checking duplicates❌")
         } else {
             let set = 0;
+            let nameExist = 0;
+            let recordId = 0;
             data.forEach(event => {
                 if(Number(event.id) === Number(req.body.partId)) {
                     set = 1;
                 }
+                if((event.name === req.body.partName) && (event.size === req.body.size)){
+                    nameExist = 1;
+                    recordId = event._id;
+                }
             })
             if(set === 0) {
-                newPart.save();
-                res.redirect("/inventory");
-                console.log("Part registered successfully✅");
+                if(nameExist === 1) {
+                    //expecting cost price is same the stock is updated
+                    Part.findByIdAndUpdate(recordId,{$inc: {stock: Number(req.body.quantity)}} ,(err, data) => {
+                        if(err) {
+                            console.log(err + " Error while updating stock for new registered part❌");
+                        } else {
+                            console.log("Regitered part already exists, so stock updated✅");
+                            res.redirect("/inventory");
+                        }
+                    })
+
+                } else {
+                    newPart.save();
+                    res.redirect("/inventory");
+                    console.log("Part registered successfully✅");
+                }
+     
             } else {
                 console.log("Given ID already exists❌  Enter a unique ID");
                 res.redirect("/")
@@ -209,7 +229,6 @@ app.post("/sorting", (req, res) => {
             if(newOne === event.date.toLocaleDateString()) {
                 filterArray.push(event);
             }
-            console.log(event.date.toLocaleDateString());
            }) 
             res.render("sorting", {printParts: filterArray});
         }
@@ -236,7 +255,7 @@ app.post("/profit", (req, res) => {
             });
 
             thresholdValuePerDay = todaysRevenue / todaysProfit;
-            res.render("statistics", {totalRevenue: todaysRevenue, totalProfit: todaysProfit, Threshold: thresholdValuePerDay });
+            res.render("statistics", {totalRevenue: todaysRevenue, totalProfit: todaysProfit, Threshold: thresholdValuePerDay, Day: inputDate });
         }
     })
 })

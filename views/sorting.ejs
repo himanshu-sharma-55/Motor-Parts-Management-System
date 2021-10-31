@@ -1,31 +1,32 @@
 <%- include("partials/header") %> 
 
 <div class="flex-structure">
-    <div>
-      <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home</button></a>
-    </div>
-    <div>
+  <div>
+    <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home | Register Parts</button></a>
+  </div>
+  <div>
+      <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
+  </div>
+  <div>
       <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
-    </div>
-    <div>
-        <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
-    </div>
-    <div>
+  </div>
+  <!-- <div>
       <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
-    </div>
-    <div>
-      <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
-    </div>
-</div>
-<!-- 
-  <div style="display: flex; justify-content: start;">
-    <a style ="text-decoration: none;" href="/sorting"><button class="style-button btn-dark"><i class="fa fa-filter"></i> Sort By Date</button></a>
   </div> -->
+  <div>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Data Statistics</button></a>
+  </div>
+
+</div>
+
+<h1 class="page-headings">FILTER INVENTORY</h1>
+<hr style="border: 8px gray dashed; background-color: white;" />
+
   <br>
     <form action="/sorting" method="post">
 
         <div class="input-group mb-3 w-25" style="margin-left: 2%;">
-            <input name="Date" type="date" class="form-control" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
+            <input name="Date" type="date" class="form-control" data-bs-toggle="tooltip" title="Choose date & click the right filter button" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
             <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fa fa-filter"></i> Sort By Date</button>
         </div>
         

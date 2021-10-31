@@ -1,23 +1,26 @@
 <%- include("partials/header") %> 
 
 <div class="flex-structure">
-
   <div>
-      <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home</button></a>
+    <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home | Register Parts</button></a>
   </div>
   <div>
-    <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
+      <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
   </div>
   <div>
       <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
   </div>
+  <!-- <div>
+      <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
+  </div> -->
   <div>
-    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Data Statistics</button></a>
   </div>
+
 </div>
 
-<h1 style="background-color: gainsboro; text-align: center;">PARTS TO ORDER</h1>
-<hr />
+<h1 class="page-headings">PARTS TO ORDER</h1>
+<hr style="border: 8px gray dashed; background-color: white;" />
 
 <table class="table table-striped table-bordered text-center">
     <thead>

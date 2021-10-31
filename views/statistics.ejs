@@ -1,35 +1,43 @@
 <%- include("partials/header") %> 
 
 <div class="flex-structure">
-
-    <div>
-        <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
-    </div>
-    <div>
-        <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
-    </div>
-    <div>
-        <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
-    </div>
-    <div>
-      <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
-    </div>
-  
+  <div>
+    <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home | Register Parts</button></a>
   </div>
-  
+  <div>
+      <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
+  </div>
+  <div>
+      <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
+  </div>
+  <!-- <div>
+      <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
+  </div> -->
+  <div>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Data Statistics</button></a>
+  </div>
+
+</div>
+  <h1 class="page-headings">STATISTICS</h1>
   <hr style="border: 8px gray dashed; background-color: white;" />
+
+  <div style="display: flex; justify-content: space-around;">
+    <a style ="text-decoration: none;margin-left: 2%;" href="/statistics"><button class="style-button btn-warning">Overall Stats</button></a>
+    <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-info">Parts To Order</button></a> 
+  </div>
   <br>
 
   <form action="/profit" method="post">
 
-    <div class="input-group mb-3 w-25" style="margin-left: 2%;">
-      <input name="Date" type="date" class="form-control" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
-      <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fa fa-filter"></i> Profit By Date</button>
+    <div class="input-group mb-3 w-50" style="margin-left: 2%;">
+      <input name="Date" type="date" class="form-control" data-bs-toggle="tooltip" title="Choose date & click the right filter button" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
+      <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fa fa-filter"></i> Revenue & Profit By Date</button>
     </div>
   </form>
+
   
-  <h1 style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0)); text-align: center; color: white; text-shadow: 1px 1px 3px black;">TODAY</h1>
-  <div class="flex-structure" style="background-image: linear-gradient(120deg,gold, rgb(255, 230, 0));padding: 1rem;">
+  <h1 style="background-image: linear-gradient(120deg,rgb(245, 137, 255), rgb(255, 124, 248)); text-align: center; color: white; text-shadow: 1px 1px 3px black;"><%= Day %></h1>
+  <div class="flex-structure" style="background-image: linear-gradient(120deg,rgb(255, 232, 29), rgb(255, 230, 0));padding: 1rem;">
     <h1 class="stats-display">Total Revenue: <%= totalRevenue %></h1>
     <hr />
     <h1 class="stats-display">Total Profit: <%= totalProfit %></h1>

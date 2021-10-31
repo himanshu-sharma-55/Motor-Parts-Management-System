@@ -1,27 +1,32 @@
 <%- include('partials/header') %>
 
 <div class="flex-structure">
-
+  <div>
+    <a style ="text-decoration: none;" href="/"><button class="style-button btn-primary">Home | Register Parts</button></a>
+  </div>
   <div>
       <a style ="text-decoration: none;" href="/inventory"><button class="style-button btn-primary">Inventory | Sell Parts</button></a>
   </div>
   <div>
       <a style ="text-decoration: none; " href="/soldItems"> <button class="style-button btn-primary">Sold Parts</button></a>
   </div>
-  <div>
+  <!-- <div>
       <a style ="text-decoration: none; " href="/orderItems"><button class="style-button btn-primary">Parts to order</button></a> 
-  </div>
+  </div> -->
   <div>
-    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Everyday Stats</button></a>
+    <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-warning">Data Statistics</button></a>
   </div>
 
 </div>
+
+<h1 class="page-headings">HOME & REGISTER PARTS</h1>
+<hr style="border: 8px gray dashed; background-color: white;" />
 
 <div class="page-container">
 
   <div class="main-container">
 
-    <h1 style="background-color:white; text-align: center;">REGISTER PARTS</h1>
+    <h1 style="background-image: linear-gradient(120deg,rgb(255, 255, 255), rgb(255, 255, 255)); text-align: center;">REGISTER PARTS</h1>
     <hr />
 
     <!-- Buying Form -->
@@ -43,15 +48,15 @@
         
       <div>
         <br>
-        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" type="text" name="partId" class="form-control" placeholder="Part ID" autocomplete="off" required>
+        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" data-bs-toggle="tooltip" title="Enter Part ID" type="text" name="partId" class="form-control" placeholder="Part ID" autocomplete="off" required>
         <br>
-        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" type="text" name="partName" class="form-control" placeholder="Part Name" autocomplete="off" required>
+        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" data-bs-toggle="tooltip" title="Enter Part Name" type="text" name="partName" class="form-control" placeholder="Part Name" autocomplete="off" required>
         <br>
-        <textarea style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" class="form-control" name="supplierInfo" rows="3" cols="4" placeholder="Supplier Name and Add." autocomplete="off" required></textarea>
+        <textarea style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" data-bs-toggle="tooltip" title="Enter Supplier Name & Address" class="form-control" name="supplierInfo" rows="3" cols="4" placeholder="Supplier Name and Add." autocomplete="off" required></textarea>
         <br>
-        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" type="text" name="price" class="form-control" placeholder="Cost Price (per unit)" autocomplete="off" required>
+        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" data-bs-toggle="tooltip" title="Enter Cost Price (Per Unit)" type="text" name="price" class="form-control" placeholder="Cost Price (per unit)" autocomplete="off" required>
         <br>
-        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" type="text" name="quantity" class="form-control" placeholder="Quantity" autocomplete="off" required>
+        <input style="border: 1px yellow solid; box-shadow: 0px 1px 2px yellow;" data-bs-toggle="tooltip" title="Enter Parts Quantity" type="text" name="quantity" class="form-control" placeholder="Quantity" autocomplete="off" required>
         <br>
         <button style="border: 1px rgb(0, 255, 221) solid; box-shadow: 0px 1px 5px blue; color: black;" name="button" type="submit" class="btn btn-outline-info">SUBMIT</button>
       </div>
