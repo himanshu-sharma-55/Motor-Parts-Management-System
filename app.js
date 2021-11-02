@@ -112,18 +112,21 @@ app.get("/sorting", (req, res) => {
 
 })
 
-app.post("/", (req, res) => {
+app.get("/soldItemsSort", (req, res) => {
 
-    const newPart = new Part({
-        id: req.body.partId,
-        date: new Date(),
-        name: req.body.partName,
-        size: req.body.size,
-        supplier: req.body.supplierInfo,
-        costPrice: req.body.price,
-        stock: req.body.quantity,
-        total: (req.body.price * req.body.quantity)
-    });
+    SoldItem.find({}, (err, data) => {
+        if(err) {
+            console.log(err);
+            console.log("Error while displaying purchased items from inventory ❌")
+        } else{
+            res.render("sorting", {printParts: data});
+        }
+    })
+
+})
+
+
+app.post("/", (req, res) => {
 
     // Checking duplicates 
     Part.find({}, (err, data) => {
@@ -156,6 +159,16 @@ app.post("/", (req, res) => {
                     })
 
                 } else {
+                    const newPart = new Part({
+                        id: req.body.partId,
+                        date: new Date(),
+                        name: req.body.partName,
+                        size: req.body.size,
+                        supplier: req.body.supplierInfo,
+                        costPrice: req.body.price,
+                        stock: req.body.quantity,
+                        total: (req.body.price * req.body.quantity)
+                    });
                     newPart.save();
                     res.redirect("/inventory");
                     console.log("Part registered successfully✅");
@@ -177,10 +190,6 @@ app.post("/update", (req, res) => {
     const soldQuantity = Number(req.body.stockSold); 
     const sellP = Number(req.body.sellingPrice);
     const costP = Number(req.body.costPrice);
-    // console.log(SP);
-    // console.log(CP);
-    // console.log(currentQuantity);
-    // console.log(soldQuantity);
 
     if((soldQuantity > 0) && (soldQuantity <= currentQuantity)) {
 
@@ -217,22 +226,38 @@ app.post("/update", (req, res) => {
 app.post("/sorting", (req, res) => {
 
     const inputDate = new Date(req.body.Date);
-    const newOne = inputDate.toLocaleDateString();
-    
-    Part.find({}, (err, data) => {
-        if(err) {
-            console.log((err) + "An Error occued while filtering inventory❌");
-        } else {
-            const filterArray = [];
 
-           data.forEach(event => {
-            if(newOne === event.date.toLocaleDateString()) {
-                filterArray.push(event);
+    if( String(req.body.pageName) === "SoldItems") {
+        SoldItem.find({}, (err, data) => {
+            if(err) {
+                console.log((err) + "An Error occued while filtering Sold Items list❌");
+            } else {
+                const filterSoldItems = [];
+    
+               data.forEach(event => {
+                if(inputDate.toLocaleDateString() === event.date.toLocaleDateString()) {
+                    filterSoldItems.push(event);
+                }
+               }) 
+                res.render("soldItemsSort", {printParts: filterSoldItems});
             }
-           }) 
-            res.render("sorting", {printParts: filterArray});
-        }
-    })
+        })
+    } else {
+        Part.find({}, (err, data) => {
+            if(err) {
+                console.log((err) + "An Error occued while filtering inventory❌");
+            } else {
+                const filterArray = [];
+    
+               data.forEach(event => {
+                if(inputDate.toLocaleDateString() === event.date.toLocaleDateString()) {
+                    filterArray.push(event);
+                }
+               }) 
+                res.render("sorting", {printParts: filterArray});
+            }
+        })
+    }
 
 })
 

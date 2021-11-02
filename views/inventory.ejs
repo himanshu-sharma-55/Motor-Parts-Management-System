@@ -46,6 +46,7 @@
 
     <% printParts.forEach((event) => { %>
         <form action="/update" method="post">
+          <!-- <input style="display: none;" type="text" name="pageName" value="Inventory"> -->
             <tr>
               <th scope="row"><%= event.id %></th>
               <td class="col-2"><%= event.date %> </td>

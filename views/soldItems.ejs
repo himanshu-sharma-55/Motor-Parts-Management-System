@@ -23,11 +23,15 @@
 <hr style="border: 8px gray dashed; background-color: white;" />
 
 <div class="col-md-12 text-center">
-  <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-dark">View Statistics</button></a>
+  <a style ="text-decoration: none;" href="/statistics"><button class="style-button btn-info">View Statistics</button></a>
 </div>
 
-  <form action="" method="post">
-    <br>
+  <form action="/sorting" method="post">
+    <input style="display: none;" type="text" name="pageName" value="SoldItems">
+    <div class="input-group mb-3 w-25" style="margin-left: 2%;">
+      <input name="Date" type="date" class="form-control" data-bs-toggle="tooltip" title="Choose date & click the right filter button" placeholder="Fill the date in the format DD/MM/YYYY" aria-label="Fill the date in the format DD/MM/YYYY" aria-describedby="button-addon2">
+      <button class="btn btn-dark" type="submit" id="button-addon2"><i class="fa fa-filter"></i> Sort By Date</button>
+  </div>
     <table class="table table-striped table-bordered text-center">
         <thead>
           <tr class="table-dark">
